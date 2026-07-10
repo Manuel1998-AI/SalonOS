@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import prenotazioni
+from routes import prenotazioni, chat
 
 app = FastAPI(
     title="SalonOS API",
@@ -8,6 +8,7 @@ app = FastAPI(
 )
 
 app.include_router(prenotazioni.router)
+app.include_router(chat.router)
 
 
 @app.get("/")
