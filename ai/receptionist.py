@@ -3,13 +3,35 @@
 def rispondi_cliente(messaggio):
     messaggio = messaggio.lower()
 
-    if "prezzo" in messaggio or "costo" in messaggio:
-        return "Posso aiutarti con le informazioni sui prezzi dei servizi del salone."
+    parole_prezzo = [
+        "prezzo",
+        "costo",
+        "quanto costa",
+        "quanto viene",
+        "tariffa"
+    ]
 
-    if "appuntamento" in messaggio or "prenotare" in messaggio:
+    parole_prenotazione = [
+        "appuntamento",
+        "prenotare",
+        "prenota",
+        "avete posto",
+        "disponibilità"
+    ]
+
+    parole_orari = [
+        "orari",
+        "aperto",
+        "chiuso"
+    ]
+
+    if any(parola in messaggio for parola in parole_prezzo):
+        return "Posso aiutarti con i prezzi dei servizi del salone."
+
+    if any(parola in messaggio for parola in parole_prenotazione):
         return "Posso aiutarti a trovare un appuntamento disponibile."
 
-    if "orari" in messaggio or "aperto" in messaggio:
+    if any(parola in messaggio for parola in parole_orari):
         return "Posso fornirti gli orari di apertura del salone."
 
-    return "Ciao! Sono l'assistente SalonOS. Come posso aiutarti?"
+    return "Ciao! Sono l'assistente SalonOS. Dimmi pure come posso aiutarti."
