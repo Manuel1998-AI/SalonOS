@@ -1,7 +1,7 @@
 # Motore prenotazioni SalonOS
 
-from service import lista_servizi
-from calendario import verifica_disponibilita, crea_appuntamento
+from services import lista_servizi
+from calendar import verifica_disponibilita, crea_appuntamento
 
 
 def trova_servizio(nome_servizio):
@@ -9,6 +9,7 @@ def trova_servizio(nome_servizio):
     servizi = lista_servizi()
 
     for servizio in servizi:
+
         if servizio["nome"].lower() == nome_servizio.lower():
             return servizio
 
