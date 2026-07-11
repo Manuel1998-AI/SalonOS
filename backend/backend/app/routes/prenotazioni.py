@@ -1,13 +1,17 @@
 from fastapi import APIRouter
-from calendar import verifica_disponibilita, crea_appuntamento
+from booking_engine import (
+    verifica_disponibilita,
+    crea_prenotazione
+)
 
 router = APIRouter()
 
 
 @router.get("/prenotazioni")
 def lista_prenotazioni():
+
     return {
-        "prenotazioni": "Sistema attivo"
+        "stato": "Sistema prenotazioni attivo"
     }
 
 
@@ -19,10 +23,14 @@ def nuova_prenotazione(
     orario: str
 ):
 
-    disponibile = verifica_disponibilita(data, orario)
+    disponibile = verifica_disponibilita(
+        data,
+        orario
+    )
 
     if disponibile:
-        appuntamento = crea_appuntamento(
+
+        appuntamento = crea_prenotazione(
             cliente,
             servizio,
             data,
