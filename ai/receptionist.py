@@ -1,7 +1,7 @@
 # Receptionist AI SalonOS
 
-from backend.services import lista_servizi
-from backend.booking_engine import crea_prenotazione
+from backend.app.services import lista_servizi
+from backend.app.booking_engine import crea_prenotazione
 from ai.booking_parser import estrai_dati_prenotazione
 
 
