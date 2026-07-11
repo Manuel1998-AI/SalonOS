@@ -1,10 +1,9 @@
 from fastapi import APIRouter
 
-from booking_engine import crea_prenotazione
+from backend.backend.app.booking_engine import crea_prenotazione
 
 
 router = APIRouter()
-
 
 
 @router.get("/prenotazioni")
@@ -13,7 +12,6 @@ def lista_prenotazioni():
     return {
         "stato": "Sistema prenotazioni attivo"
     }
-
 
 
 @router.post("/prenotazioni")
