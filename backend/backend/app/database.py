@@ -7,7 +7,9 @@ DATABASE_NAME = "salonos.db"
 
 
 def get_connection():
+
     conn = sqlite3.connect(DATABASE_NAME)
+
     return conn
 
 
@@ -59,6 +61,7 @@ def inizializza_database():
 
 
     # Servizi iniziali SalonOS
+
     servizi_base = [
         ("Taglio uomo", 25, 30),
         ("Barba", 15, 20),
@@ -93,6 +96,7 @@ def inizializza_database():
 
 
     conn.commit()
+
     conn.close()
 
 
