@@ -1,7 +1,7 @@
 # Receptionist AI SalonOS
 
-from database import salone_config
-from backend.app.services import lista_servizi
+from service import lista_servizi
+from booking_engine import verifica_disponibilita, crea_prenotazione
 
 
 def rispondi_cliente(messaggio):
@@ -9,6 +9,7 @@ def rispondi_cliente(messaggio):
     messaggio = messaggio.lower()
 
     servizi = lista_servizi()
+
 
     for servizio in servizi:
 
@@ -21,6 +22,15 @@ def rispondi_cliente(messaggio):
                 f"{servizio['durata']} minuti."
             )
 
+
+    if "prenotare" in messaggio or "appuntamento" in messaggio:
+
+        return (
+            "Perfetto, posso aiutarti a prenotare. "
+            "Dimmi quale servizio vuoi e il giorno preferito."
+        )
+
+
     if "prezzo" in messaggio or "costo" in messaggio:
 
         return (
@@ -28,12 +38,6 @@ def rispondi_cliente(messaggio):
             "e ti comunicherò prezzo e durata."
         )
 
-    if "appuntamento" in messaggio or "prenotare" in messaggio:
-
-        return (
-            "Posso aiutarti a trovare "
-            "un orario disponibile."
-        )
 
     return (
         "Ciao! Sono l'assistente SalonOS. "
