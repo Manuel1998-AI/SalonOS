@@ -1,8 +1,8 @@
 # Receptionist AI SalonOS
 
-from service import lista_servizi
-from booking_engine import verifica_disponibilita, crea_prenotazione
-from booking_parser import estrai_dati_prenotazione
+from backend.services import lista_servizi
+from backend.booking_engine import crea_prenotazione
+from ai.booking_parser import estrai_dati_prenotazione
 
 
 def rispondi_cliente(messaggio):
@@ -29,31 +29,32 @@ def rispondi_cliente(messaggio):
 
 
     # Gestione prenotazione
+
     if dati_prenotazione["servizio"]:
 
         if dati_prenotazione["giorno"] and dati_prenotazione["ora"]:
 
-            disponibile = verifica_disponibilita(
+            risultato = crea_prenotazione(
+                "Cliente",
+                dati_prenotazione["servizio"],
                 dati_prenotazione["giorno"],
                 dati_prenotazione["ora"]
             )
 
+            if risultato["stato"] == "confermata":
 
-            if disponibile:
-
-                appuntamento = crea_prenotazione(
-                    "Cliente",
-                    dati_prenotazione["servizio"],
-                    dati_prenotazione["giorno"],
-                    dati_prenotazione["ora"]
-                )
+                appuntamento = risultato["appuntamento"]
 
                 return (
                     "Perfetto! Ho preparato la tua prenotazione:\n"
                     f"Servizio: {appuntamento['servizio']}\n"
                     f"Giorno: {appuntamento['data']}\n"
-                    f"Ora: {appuntamento['ora']}"
+                    f"Ora: {appuntamento['orario']}"
                 )
+
+            return (
+                "Mi dispiace, questo orario non è disponibile."
+            )
 
 
         return (
