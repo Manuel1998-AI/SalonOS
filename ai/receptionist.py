@@ -12,8 +12,6 @@ def rispondi_cliente(messaggio):
     messaggio = messaggio.lower()
 
 
-    # Analizza eventuale richiesta di prenotazione
-
     dati_prenotazione = estrai_dati_prenotazione(
         messaggio
     )
@@ -22,8 +20,6 @@ def rispondi_cliente(messaggio):
     servizi = lista_servizi()
 
 
-
-    # Controllo informazioni servizi
 
     for servizio in servizi:
 
@@ -37,8 +33,6 @@ def rispondi_cliente(messaggio):
             )
 
 
-
-    # Gestione prenotazione
 
     if dati_prenotazione["servizio"]:
 
@@ -56,9 +50,7 @@ def rispondi_cliente(messaggio):
 
             if risultato["stato"] == "confermata":
 
-
                 appuntamento = risultato["appuntamento"]
-
 
                 return (
                     "Perfetto! Ho preparato la tua prenotazione:\n"
@@ -68,10 +60,7 @@ def rispondi_cliente(messaggio):
                 )
 
 
-            return (
-                "Mi dispiace, questo orario non è disponibile."
-            )
-
+            return "Mi dispiace, questo orario non è disponibile."
 
 
         return (
