@@ -1,7 +1,9 @@
-# Motore prenotazioni SalonOS
+# Motore prenotazioni SalonOS v0.1
 
-from backend.app.services import lista_servizi
-from backend.app.calendar import verifica_disponibilita, crea_appuntamento
+
+from services import lista_servizi
+from calendar import verifica_disponibilita, crea_appuntamento
+
 
 
 def trova_servizio(nome_servizio):
@@ -16,12 +18,14 @@ def trova_servizio(nome_servizio):
     return None
 
 
+
 def crea_prenotazione(cliente, servizio, data, ora):
 
     disponibile = verifica_disponibilita(
         data,
         ora
     )
+
 
     if disponibile:
 
@@ -32,10 +36,12 @@ def crea_prenotazione(cliente, servizio, data, ora):
             ora
         )
 
+
         return {
             "stato": "confermata",
             "appuntamento": appuntamento
         }
+
 
     return {
         "stato": "non disponibile",
