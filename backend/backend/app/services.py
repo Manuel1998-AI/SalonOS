@@ -1,6 +1,19 @@
 # Gestione servizi SalonOS
 
-servizi = []
+servizi = [
+
+    {
+        "nome": "Taglio",
+        "prezzo": 25,
+        "durata": 30
+    },
+
+    {
+        "nome": "Barba",
+        "prezzo": 15,
+        "durata": 20
+    }
+]
 
 
 def aggiungi_servizio(nome, prezzo, durata):
