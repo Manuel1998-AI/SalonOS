@@ -11,6 +11,7 @@ def get_connection():
     return conn
 
 
+
 def inizializza_database():
 
     conn = get_connection()
@@ -57,8 +58,43 @@ def inizializza_database():
     """)
 
 
+    # Servizi iniziali SalonOS
+    servizi_base = [
+        ("Taglio uomo", 25, 30),
+        ("Barba", 15, 20),
+        ("Taglio donna", 40, 60),
+        ("Colore", 50, 90)
+    ]
+
+
+    for servizio in servizi_base:
+
+        cursor.execute(
+            """
+            SELECT * FROM servizi
+            WHERE nome = ?
+            """,
+            (servizio[0],)
+        )
+
+        esiste = cursor.fetchone()
+
+
+        if not esiste:
+
+            cursor.execute(
+                """
+                INSERT INTO servizi
+                (nome, prezzo, durata)
+                VALUES (?, ?, ?)
+                """,
+                servizio
+            )
+
+
     conn.commit()
     conn.close()
+
 
 
 def get_database_info():
