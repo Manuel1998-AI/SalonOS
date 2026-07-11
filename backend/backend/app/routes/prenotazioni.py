@@ -1,8 +1,5 @@
 from fastapi import APIRouter
-from booking_engine import (
-    verifica_disponibilita,
-    crea_prenotazione
-)
+from booking_engine import crea_prenotazione
 
 router = APIRouter()
 
@@ -23,26 +20,11 @@ def nuova_prenotazione(
     orario: str
 ):
 
-    disponibile = verifica_disponibilita(
+    risultato = crea_prenotazione(
+        cliente,
+        servizio,
         data,
         orario
     )
 
-    if disponibile:
-
-        appuntamento = crea_prenotazione(
-            cliente,
-            servizio,
-            data,
-            orario
-        )
-
-        return {
-            "stato": "Confermato",
-            "appuntamento": appuntamento
-        }
-
-    return {
-        "stato": "Non disponibile",
-        "messaggio": "Orario già occupato"
-    }
+    return risultato
