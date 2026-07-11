@@ -1,34 +1,64 @@
-# Gestione servizi SalonOS
+# Gestione servizi SalonOS v0.1
+# Collegato a database SQLite
 
-servizi = [
-
-    {
-        "nome": "Taglio",
-        "prezzo": 25,
-        "durata": 30
-    },
-
-    {
-        "nome": "Barba",
-        "prezzo": 15,
-        "durata": 20
-    }
-]
+from backend.backend.app.database import get_connection
 
 
 def aggiungi_servizio(nome, prezzo, durata):
 
-    nuovo_servizio = {
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        INSERT INTO servizi
+        (nome, prezzo, durata)
+        VALUES (?, ?, ?)
+        """,
+        (
+            nome,
+            prezzo,
+            durata
+        )
+    )
+
+    conn.commit()
+    conn.close()
+
+    return {
         "nome": nome,
         "prezzo": prezzo,
         "durata": durata
     }
 
-    servizi.append(nuovo_servizio)
-
-    return nuovo_servizio
 
 
 def lista_servizi():
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT nome, prezzo, durata
+        FROM servizi
+        """
+    )
+
+    risultati = cursor.fetchall()
+
+    conn.close()
+
+
+    servizi = []
+
+    for servizio in risultati:
+
+        servizi.append({
+            "nome": servizio[0],
+            "prezzo": servizio[1],
+            "durata": servizio[2]
+        })
+
 
     return servizi
