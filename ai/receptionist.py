@@ -1,21 +1,30 @@
 # Receptionist AI SalonOS
 
-from backend.app.services import lista_servizi
-from backend.app.booking_engine import crea_prenotazione
+
+from backend.backend.app.services import lista_servizi
+from backend.backend.app.booking_engine import crea_prenotazione
 from ai.booking_parser import estrai_dati_prenotazione
+
 
 
 def rispondi_cliente(messaggio):
 
     messaggio = messaggio.lower()
 
+
     # Analizza eventuale richiesta di prenotazione
-    dati_prenotazione = estrai_dati_prenotazione(messaggio)
+
+    dati_prenotazione = estrai_dati_prenotazione(
+        messaggio
+    )
+
 
     servizi = lista_servizi()
 
 
+
     # Controllo informazioni servizi
+
     for servizio in servizi:
 
         if servizio["nome"].lower() in messaggio:
@@ -28,11 +37,14 @@ def rispondi_cliente(messaggio):
             )
 
 
+
     # Gestione prenotazione
 
     if dati_prenotazione["servizio"]:
 
+
         if dati_prenotazione["giorno"] and dati_prenotazione["ora"]:
+
 
             risultato = crea_prenotazione(
                 "Cliente",
@@ -41,9 +53,12 @@ def rispondi_cliente(messaggio):
                 dati_prenotazione["ora"]
             )
 
+
             if risultato["stato"] == "confermata":
 
+
                 appuntamento = risultato["appuntamento"]
+
 
                 return (
                     "Perfetto! Ho preparato la tua prenotazione:\n"
@@ -52,15 +67,18 @@ def rispondi_cliente(messaggio):
                     f"Ora: {appuntamento['orario']}"
                 )
 
+
             return (
                 "Mi dispiace, questo orario non è disponibile."
             )
+
 
 
         return (
             "Perfetto, posso aiutarti con la prenotazione. "
             "Mi serve solo il giorno e l'orario preferito."
         )
+
 
 
     if "prezzo" in messaggio or "costo" in messaggio:
@@ -71,12 +89,14 @@ def rispondi_cliente(messaggio):
         )
 
 
+
     if "appuntamento" in messaggio or "prenotare" in messaggio:
 
         return (
             "Certo, posso aiutarti a prenotare. "
             "Dimmi quale servizio vuoi scegliere."
         )
+
 
 
     return (
