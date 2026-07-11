@@ -1,8 +1,8 @@
 # Motore prenotazioni SalonOS v0.1
 
 
-from services import lista_servizi
-from calendar import verifica_disponibilita, crea_appuntamento
+from backend.backend.app.services import lista_servizi
+from backend.backend.app.calendar import verifica_disponibilita, crea_appuntamento
 
 
 
