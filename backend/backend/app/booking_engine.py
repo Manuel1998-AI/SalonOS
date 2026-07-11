@@ -1,7 +1,7 @@
 # Motore prenotazioni SalonOS
 
-from services import lista_servizi
-from calendar import verifica_disponibilita, crea_appuntamento
+from backend.app.services import lista_servizi
+from backend.app.calendar import verifica_disponibilita, crea_appuntamento
 
 
 def trova_servizio(nome_servizio):
