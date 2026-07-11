@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from booking_engine import crea_prenotazione
+from backend.app.booking_engine import crea_prenotazione
 
 router = APIRouter()
 
